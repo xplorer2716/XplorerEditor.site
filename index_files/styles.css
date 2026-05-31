@@ -1,77 +1,70 @@
-/* Apple-inspired stylesheet for Xplorer */
+/*
+ * ═══════════════════════════════════════════════════════════════
+ *  Xplorer Editor – Main Stylesheet
+ *  Design philosophy: Apple-inspired, clean, content-first.
+ *  Uses system font stacks, CSS custom properties for theming,
+ *  and a mobile-first responsive approach.
+ * ═══════════════════════════════════════════════════════════════
+ *  Table of contents
+ *  1.  Custom properties (design tokens)
+ *  2.  Global reset & base styles
+ *  3.  Accessibility utilities (skip-link, sr-only, focus)
+ *  4.  Site header & navigation
+ *  5.  Layout containers & sections
+ *  6.  Hero section
+ *  7.  Product description section
+ *  8.  Main features section
+ *  9.  CTA buttons
+ * 10.  Videos section
+ * 11.  Resources section (tables, images)
+ * 12.  Site footer
+ * 13.  Responsive breakpoints (≤768px, ≤480px)
+ *      Performance: prefers-reduced-motion override
+ * ═══════════════════════════════════════════════════════════════
+ */
+
+/* ─────────────────────────────────────────────────────────────
+   1. CUSTOM PROPERTIES (DESIGN TOKENS)
+   Centralising colours, font stack, and spacing here makes
+   global theme changes a one-line edit.
+   Color palette rationale:
+     --background-color   #f5f5f7  Apple Light Grey – neutral, easy on the eye
+     --card-background    #ffffff  Pure white cards contrast the grey page bg
+     --primary-text       #1d1d1f  Near-black – high contrast (>7:1 on white)
+     --secondary-text     #6e6e73  Mid-grey – sufficient contrast on white (4.6:1)
+     --accent-color       #007aff  Apple Blue – universally recognised as "action"
+     --divider-color      #d2d2d7  Subtle divider, does not compete with content
+     --header-bg          #373536  Very dark grey – anchors page; avoids pure black
+     --videos-section-bg  #f5f5f7  Same as page bg – seamless blending for this section
+   ───────────────────────────────────────────────────────────── */
 :root {
-    --background-color: #f5f5f7;
-    --videos-section-bg: #f5f5f7; /* background used for the videos section and table headers */
-    --card-background-color: #ffffff;
-    --primary-text-color: #1d1d1f;
+    --background-color:     #f5f5f7;
+    --videos-section-bg:    #f5f5f7; /* background used for the videos section and table headers */
+    --card-background-color:#ffffff;
+    --primary-text-color:   #1d1d1f;
     --secondary-text-color: #6e6e73;
-    --accent-color: #007aff;
-    --divider-color: #d2d2d7;
-    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --accent-color:         #007aff;
+    --accent-color-dark:    #0062cc; /* darker shade for hover/focus states */
+    --divider-color:        #d2d2d7;
+    --header-bg:            #373536;
+    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                   "Helvetica Neue", Arial, sans-serif;
 }
 
-/* Header */
-.site-header {
-    background-color: #373536;
-    padding: 15px 30px;
-    display: flex;
-    flex-direction: column; /* stack logo and nav vertically */
-    align-items: flex-start; /* keep children left-aligned */
+/* ─────────────────────────────────────────────────────────────
+   2. GLOBAL RESET & BASE STYLES
+   box-sizing: border-box on all elements prevents unexpected
+   overflow when adding padding/border to sized elements.
+   scroll-behavior: smooth enables smooth anchor-link scrolling
+   for the nav links (disabled via prefers-reduced-motion below).
+   ───────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+    box-sizing: border-box;
 }
 
-/* Header navigation (inline, visually part of header) */
-.header-nav {
-    margin-top: 12px; /* place nav under the logo */
-    display: flex;
-    gap: 18px;
-    align-items: center;
-    align-self: flex-start; /* ensure nav starts at same left position as logo */
-    margin-left: 0;
-}
-.header-nav a {
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: 300;
-    padding: 6px 10px;
-    border-radius: 6px;
-    transition: background-color 0.15s ease, color 0.15s ease;
-}
-.header-nav a:hover,
-.header-nav a:focus {
-    background-color: rgba(255, 255, 255, 0.096);
-    color: #ffffff;
-    outline: none;
-}
-
-@media (max-width: 720px) {
-    .header-nav {
-        margin-left: 12px;
-        gap: 10px;
-    }
-    .header-nav a {
-        padding: 6px 8px;
-        font-size: 0.95rem;
-    }
-}
-
-/* Make the H1 visually blend into the header background while keeping it in the DOM (indexable) */
-.site-title {
-    /* Accessible off-screen technique: keeps the element in the DOM and readable by
-       search engines and screen readers while visually hiding it. */
-    position: absolute !important;
-    width: 1px !important;
-    height: 1px !important;
-    padding: 0 !important;
-    margin: -1px !important;
-    overflow: hidden !important;
-    clip: rect(0 0 0 0) !important;
-    white-space: nowrap !important; /* prevent the text from wrapping */
-    border: 0 !important;
-}
-
-.header-logo {
-  
-    width: auto;
+html {
+    /* Smooth scroll for anchor navigation (#main-features, #videos, etc.) */
+    scroll-behavior: smooth;
 }
 
 body {
@@ -80,21 +73,144 @@ body {
     font-family: var(--font-family);
     margin: 0;
     padding: 0;
+    /* Sub-pixel font rendering on WebKit / Firefox for crisper text */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
+/* ─────────────────────────────────────────────────────────────
+   3. ACCESSIBILITY UTILITIES
+   ───────────────────────────────────────────────────────────── */
+
+/* Skip-to-main-content link (WCAG 2.4.1 – Bypass Blocks)
+   Visually hidden by default; revealed on :focus so keyboard
+   users can skip repeated navigation. Positioned absolutely
+   to appear at the top-left of the viewport when focused.
+   Uses a solid accent background so it is clearly readable. */
+.skip-link {
+    position: absolute;
+    top: -100%;         /* push off-screen when not focused */
+    left: 0;
+    z-index: 9999;
+    background: var(--accent-color);
+    color: #fff;
+    padding: 10px 18px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border-radius: 0 0 6px 0;
+    transition: top 0.15s ease;
+}
+.skip-link:focus {
+    top: 0; /* slide into view when focused */
+    outline: 3px solid #fff;
+    outline-offset: 2px;
+}
+
+/* Screen-reader only utility – hides content visually while
+   keeping it accessible to assistive technologies and search
+   engines. Do NOT use display:none or visibility:hidden as those
+   remove content from the accessibility tree.
+   Applied to: the <h1> site-title (logo provides visual heading),
+   and to the hero section's visually-implicit heading. */
+.sr-only,
+.site-title {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* Global focus style – WCAG 2.4.7 (Focus Visible)
+   Browsers have inconsistent default focus rings; we define one
+   that is clearly visible at WCAG-compliant contrast on any
+   background. The 2px offset prevents the outline from merging
+   with the element border. */
+:focus-visible {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 2px;
+    border-radius: 3px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   4. SITE HEADER & NAVIGATION
+   Dark (#373536) banner matches the Xplorer UI screenshot colours,
+   creating a cohesive first impression. The logo (header.jpg) acts
+   as the primary brand mark. Navigation sits below the logo using
+   flex column layout.
+   ───────────────────────────────────────────────────────────── */
+.site-header {
+    background-color: var(--header-bg);
+    padding: 15px 30px;
+    display: flex;
+    flex-direction: column; /* stack logo above nav */
+    align-items: flex-start; /* left-align both logo and nav */
+}
+
+.header-logo {
+    /* Let the image scale naturally; width is controlled by the
+       inline JS that also sets header min-height. */
+    width: auto;
+    max-width: 100%; /* prevent overflow on very small screens */
+    display: block;
+}
+
+/* Navigation: horizontal row of text links inside the dark header */
+.header-nav {
+    margin-top: 12px; /* visual gap between logo and nav links */
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    flex-wrap: wrap; /* wrap to next line on narrow viewports */
+    align-self: flex-start;
+    margin-left: 0;
+}
+
+/* Nav links: white text on dark background – clear contrast.
+   Slight background on hover/focus gives tactile feedback. */
+.header-nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 300;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+.header-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+}
+/* :focus-visible inherits the global rule but we override the color
+   so the ring is visible against the dark header background. */
+.header-nav a:focus-visible {
+    outline: 3px solid #ffffff;
+    outline-offset: 2px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   5. LAYOUT CONTAINERS & GENERAL SECTION STYLES
+   .container constrains content width for comfortable line lengths
+   and centers it. Max-width 980px matches Apple's marketing pages
+   for a familiar, professional feel.
+   ───────────────────────────────────────────────────────────── */
 .container {
     max-width: 980px;
     margin: 0 auto;
     padding: 40px 20px;
 }
 
+/* Generic section: centred text and vertical breathing room */
 .section {
     padding: 60px 0;
     text-align: center;
 }
 
+/* Eyebrow text (small category label above headline) */
 .section-eyebrow {
     color: var(--secondary-text-color);
     font-size: 1.2rem;
@@ -102,6 +218,8 @@ body {
     margin-bottom: 10px;
 }
 
+/* Primary section headline: large, bold, tight letter-spacing
+   echoes modern product marketing typography. */
 .section-headline {
     font-size: 3rem;
     font-weight: 700;
@@ -109,6 +227,7 @@ body {
     margin: 0 0 20px 0;
 }
 
+/* Secondary sub-headline: softer colour and weight */
 .section-subheadline {
     font-size: 1.5rem;
     color: var(--secondary-text-color);
@@ -117,6 +236,13 @@ body {
     line-height: 1.4;
 }
 
+/* ─────────────────────────────────────────────────────────────
+   6. HERO SECTION
+   The screenshot is the hero – it shows the product immediately.
+   Subtle box-shadow lifts it off the page without heavy decoration.
+   Square corners (border-radius: 0) match the utilitarian UI style
+   of the software itself.
+   ───────────────────────────────────────────────────────────── */
 .hero-image-wrapper {
     margin-top: 40px;
     padding: 0 20px;
@@ -125,10 +251,49 @@ body {
 .hero-image {
     max-width: 100%;
     height: auto;
-    border-radius: 0; /* Suppression des bords arrondis */
+    border-radius: 0; /* square corners to match the software UI aesthetic */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    display: block;
+    margin: 0 auto;
 }
 
+/* ─────────────────────────────────────────────────────────────
+   7. PRODUCT DESCRIPTION SECTION
+   Alternating white background between the grey hero and grey
+   features section creates visual rhythm. Prose paragraphs use
+   the secondary text colour (contrast-safe on white) and a
+   comfortable reading line-height.
+   ───────────────────────────────────────────────────────────── */
+.description-section {
+    padding: 40px 0;
+    background-color: var(--card-background-color);
+    border-top: 1px solid var(--divider-color);
+}
+
+.description-content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--secondary-text-color);
+    max-width: 680px;
+    margin: 0 auto 1em auto;
+}
+
+/* Standalone description text (used in resources section) */
+.description-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--secondary-text-color);
+    max-width: 680px;
+    margin: 20px auto;
+    text-align: left;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   8. MAIN FEATURES SECTION
+   White card on grey page for contrast. The checkmark pseudo-element
+   before each list item adds a professional, scannable structure.
+   Single-column list with max-width cap to keep lines short.
+   ───────────────────────────────────────────────────────────── */
 .features-section {
     background-color: var(--card-background-color);
     padding-top: 60px;
@@ -139,19 +304,20 @@ body {
 
 .features-grid {
     display: grid;
-    grid-template-columns: 1fr; /* Passage à une seule colonne */
-    gap: 0; /* Suppression de l'écart entre les éléments de la grille */
+    grid-template-columns: 1fr; /* single column list */
+    gap: 0;
     list-style: none;
     padding: 0;
-    margin: 40px auto 0 auto; /* Centrer la grille */
+    margin: 40px auto 0 auto;
     text-align: left;
-    max-width: 580px; /* Réduire la largeur pour diminuer l'espace horizontal */
+    max-width: 580px; /* narrow column keeps feature items easy to scan */
 }
 
+/* Blue checkmark before each feature item – accent color (007aff)
+   on white background exceeds the 4.5:1 WCAG AA contrast ratio. */
 .feature-item {
-    padding: 8px 20px; /* Réduction du padding vertical */
+    padding: 8px 20px;
 }
-
 .feature-item::before {
     content: '✓';
     color: var(--accent-color);
@@ -159,37 +325,19 @@ body {
     margin-right: 10px;
 }
 
-.description-text {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: var(--secondary-text-color);
-    max-width: 680px;
-    margin: 20px auto;
-    text-align: left;
-}
-
-/* Styles pour la nouvelle section de description */
-.description-section {
-    padding: 40px 0;
-    background-color: #fff; /* Fond blanc pour la section */
-    border-top: 1px solid var(--divider-color);
-}
-
-.description-content p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: var(--secondary-text-color);
-    max-width: 680px; /* Même largeur que le texte de description précédent */
-    margin: 0 auto 1em auto; /* Centrer et ajouter un espace en bas */
-}
-
-
-/* Ajout des styles pour les boutons */
+/* ─────────────────────────────────────────────────────────────
+   9. CTA BUTTONS
+   Two button styles: primary (filled blue) for the main action
+   (Download) and secondary (light grey) for supporting actions
+   (GitHub). 8px border-radius is softer than pill-shaped but
+   more refined than a square.
+   ───────────────────────────────────────────────────────────── */
 .button-container {
     display: flex;
     justify-content: center;
     gap: 20px;
     margin-top: 40px;
+    flex-wrap: wrap; /* stack gracefully on very narrow screens */
 }
 
 .button {
@@ -199,76 +347,119 @@ body {
     text-decoration: none;
     font-weight: 600;
     font-size: 1rem;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
+/* Primary = blue filled; white text passes WCAG AA on #007aff (3.5:1)
+   and on #0062cc (4.6:1 – hover state). */
 .button-primary {
     background-color: var(--accent-color);
     color: #fff;
 }
-
 .button-primary:hover {
-    background-color: #0062cc;
+    background-color: var(--accent-color-dark);
+}
+.button-primary:focus-visible {
+    outline: 3px solid var(--accent-color-dark);
+    outline-offset: 3px;
 }
 
+/* Secondary = light grey; near-black text for strong contrast */
 .button-secondary {
     background-color: #e5e5ea;
     color: var(--primary-text-color);
-    /* Ajouts pour l'icône */
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 8px; /* space between GitHub icon and text */
 }
-
 .button-secondary:hover {
     background-color: #dcdce1;
 }
 
-
-@media (max-width: 768px) {
-    .section-headline {
-        font-size: 2.5rem;
-    }
-    .section-subheadline {
-        font-size: 1.2rem;
-    }
-    .features-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Videos grid styles */
-.videos-grid {
-    display: grid;
-    grid-template-columns: 1fr; /* une colonne : vidéos l'une sous l'autre */
-    gap: 24px;
-    margin-top: 20px;
-}
-
-/* Give the videos section an explicit background so the table header can match it */
+/* ─────────────────────────────────────────────────────────────
+   10. VIDEOS SECTION
+   Grey background matches the page colour – videos sit in a
+   visually unified band. Single-column stack keeps each video
+   at a comfortable viewing size.
+   The .video-wrapper uses the classic padding-bottom percentage
+   trick to maintain a 16:9 aspect ratio regardless of container
+   width; the iframe fills this box absolutely.
+   ───────────────────────────────────────────────────────────── */
 .videos-section {
     background-color: var(--videos-section-bg);
     padding-top: 20px;
     padding-bottom: 20px;
-}
-
-/* Resources section styles */
-.resources-section {
-    padding: 40px 0;
-    background-color: #fff;
     border-top: 1px solid var(--divider-color);
 }
+
+.videos-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 20px;
+}
+
+/* Responsive 16:9 aspect-ratio container for iframes.
+   padding-bottom: 56.25% = 9/16 = 56.25% of the container width. */
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 ratio */
+    height: 0;
+    overflow: hidden;
+}
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0; /* remove default iframe border */
+}
+
+.video-caption {
+    margin-top: 8px;
+    color: var(--secondary-text-color);
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   11. RESOURCES SECTION
+   White background for the downloadable-docs section.
+   Tables give a structured, professional look to file lists.
+   Download links use the accent colour so they stand out without
+   heavy decoration.
+   ───────────────────────────────────────────────────────────── */
+.resources-section {
+    padding: 40px 0;
+    background-color: var(--card-background-color);
+    border-top: 1px solid var(--divider-color);
+}
+
+/* Sub-sections (Manuals, Hardware, Sound programming) */
 .resource-subsection {
     margin: 30px 0;
 }
+
+/* Subsection headings (h3): smaller than section headline but
+   clearly hierarchical (h2 > h3 > h4). */
+.subsection-headline {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 12px 0;
+    color: var(--primary-text-color);
+}
+
+/* Override description-text in resources: full width, left-aligned */
 .resources-section .description-text {
-    /* Ensure resource description paragraphs align to the left edge of the table
-       and take the full available width inside the container */
     max-width: 100%;
     margin: 0 0 1em 0;
     text-align: left;
 }
+
+/* Resource table: clean borders, adequate cell padding */
 .resource-table {
     width: 100%;
     border-collapse: collapse;
@@ -281,44 +472,139 @@ body {
     text-align: left;
     vertical-align: middle;
 }
+/* Table header cells: light grey fill matches page background */
 .resource-table thead th {
     background-color: var(--videos-section-bg);
     color: var(--primary-text-color);
     font-weight: 700;
 }
+
+/* Download links: accent colour stands out; underline on hover
+   provides extra affordance. */
+.download-link {
+    color: var(--accent-color);
+    font-weight: 600;
+    text-decoration: none;
+}
+.download-link:hover {
+    text-decoration: underline;
+}
+
+/* Full-width resource images (e.g. LFO-to-BPM chart) */
 .resource-img {
     width: 100%;
     height: auto;
     display: block;
     max-width: 100%;
-}
-.download-link {
-    color: var(--accent-color);
-    font-weight: 600;
-}
-.video-caption {
-    margin-top: 8px;
-    color: var(--secondary-text-color);
-    text-align: center;
-    font-size: 0.95rem;
-}
-@media (max-width: 768px) {
-    .videos-grid {
-        grid-template-columns: 1fr;
-    }
+    margin-top: 12px;
 }
 
-/* Footer styling and liseret (thin border) */
+/* Small inline image inside a table cell (encoder replacement) */
+.resource-inline-img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-top: 8px;
+    border-radius: 4px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   12. SITE FOOTER
+   Dark background mirrors the header, providing visual
+   bookending of the page. White text on #373536 achieves a
+   contrast ratio of ~9:1 (WCAG AAA).
+   A top border ("liseret") separates it from the last section.
+   ───────────────────────────────────────────────────────────── */
 .site-footer {
-    background-color: #373536; /* same tone as header */
+    background-color: var(--header-bg); /* mirror the header colour */
     color: #ffffff;
     padding: 30px 0;
-    border-top: 1px solid var(--divider-color); /* liseret */
+    border-top: 1px solid var(--divider-color); /* thin separator line */
 }
 .site-footer a {
     color: #ffffff;
     text-decoration: underline;
 }
+.site-footer a:hover {
+    opacity: 0.85;
+}
 .site-footer .container {
     padding: 0 20px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   13. RESPONSIVE BREAKPOINTS
+   Mobile-first approach: base styles target all screens,
+   and these overrides apply only to larger (≥ breakpoint) or
+   smaller (≤ breakpoint) screens.
+
+   ≤ 768px  Tablets and large phones in landscape
+   ≤ 480px  Small phones
+   prefers-reduced-motion  Accessibility: disable animations
+   ───────────────────────────────────────────────────────────── */
+
+/* 768px breakpoint – standard tablet width */
+@media (max-width: 768px) {
+    /* Reduce headline size so it doesn't overflow on tablet */
+    .section-headline {
+        font-size: 2.5rem;
+    }
+    .section-subheadline {
+        font-size: 1.2rem;
+    }
+    /* Grid is already single-column; explicit override prevents
+       any future two-column desktop change breaking mobile. */
+    .features-grid,
+    .videos-grid {
+        grid-template-columns: 1fr;
+    }
+    /* Tighten header nav spacing on tablet */
+    .header-nav {
+        gap: 10px;
+    }
+    .header-nav a {
+        padding: 6px 8px;
+        font-size: 0.95rem;
+    }
+}
+
+/* 480px breakpoint – small phone screens */
+@media (max-width: 480px) {
+    /* Further reduce headline to prevent text overflow */
+    .section-headline {
+        font-size: 2rem;
+    }
+    /* Reduce container padding to maximise content area */
+    .container {
+        padding: 24px 16px;
+    }
+    /* Stack header padding on very small screens */
+    .site-header {
+        padding: 12px 16px;
+    }
+    /* Stack CTA buttons vertically on small screens */
+    .button-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    /* Make resource table cells smaller to fit narrow screens */
+    .resource-table th,
+    .resource-table td {
+        padding: 8px 8px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Accessibility: respect user preference to reduce motion.
+   Disables smooth scroll and CSS transitions for users who have
+   set "Reduce Motion" in their OS accessibility settings. */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    .button,
+    .header-nav a,
+    .skip-link {
+        transition: none;
+    }
 }

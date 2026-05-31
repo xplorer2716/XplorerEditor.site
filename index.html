@@ -1,31 +1,134 @@
 <!DOCTYPE html>
+<!--
+    Xplorer Editor – Product website
+    Repository : https://github.com/xplorer2716/XplorerEditor.site
+    Purpose    : Single-page product site for the Xplorer real-time editor for
+                 Oberheim Xpander and Matrix-12 synthesizers.
+    Structure  :
+        <head>   – SEO metadata, Open Graph / Twitter Card, JSON-LD, CSS link
+        <body>
+          skip-to-content  – accessibility shortcut (WCAG 2.4.1)
+          <header>         – site logo + primary navigation
+          <main>
+            hero section   – screenshot + CTA buttons
+            description    – product description paragraphs
+            features       – bulleted feature list
+            videos         – embedded YouTube demos
+            resources      – manuals, hardware docs, sound-programming references
+          </main>
+          <footer>         – copyright + GitHub link
+          <script>         – minimal inline JS to keep header min-height correct
+        </body>
+-->
 <html lang="en">
 
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <!-- ═══════════════════════════════════════════════════════
+         CHARACTER ENCODING & VIEWPORT
+         Must appear as early as possible in <head> so the
+         browser never mis-interprets the page encoding.
+    ═══════════════════════════════════════════════════════ -->
+    <!-- Declare UTF-8 encoding – prevents mojibake on special characters -->
     <meta charset="UTF-8">
+    <!-- Legacy compatibility shim for very old IE/Edge; harmless on modern browsers -->
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <!-- Responsive viewport: scales to device width, prevents font inflation on iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xplorer - Oberheim Xpander and Matrix-12 Editor</title>
+
+    <!-- ═══════════════════════════════════════════════════════
+         PAGE TITLE
+         Formula: Primary keyword + Brand | ~50–60 chars
+         Shown in browser tabs, search-result titles, and
+         bookmark lists. Keep it unique per page.
+    ═══════════════════════════════════════════════════════ -->
+    <title>Xplorer – Oberheim Xpander &amp; Matrix-12 Editor | Real-Time MIDI Software</title>
+
+    <!-- ═══════════════════════════════════════════════════════
+         CORE SEO META TAGS
+    ═══════════════════════════════════════════════════════ -->
+    <!-- ~150-char summary shown below the title in search results -->
     <meta name="description"
-        content="Xplorer is a real-time, bi-directional editor for Oberheim Xpander and Matrix-12. Edit and automate 226 parameters, live MIDI control, patch management and SysEx backup.">
+        content="Xplorer is a free, real-time bi-directional editor for Oberheim Xpander and Matrix-12. Edit 226 parameters, live MIDI control, patch management and SysEx backup.">
+    <!-- Supplementary keyword hints for search engines -->
     <meta name="keywords"
-        content="Xplorer, Oberheim, Xpander, Matrix-12, synth editor, SysEx, MIDI editor, patch librarian">
+        content="Xplorer, Oberheim, Xpander, Matrix-12, synth editor, SysEx, MIDI editor, patch librarian, real-time, bi-directional">
+    <!-- Identifies the content author / maintainer -->
+    <meta name="author" content="xplorer2716">
+    <!-- Allow indexing and following all links from this page -->
     <meta name="robots" content="index, follow">
+    <!-- Canonical URL prevents duplicate-content penalties when the page is
+         accessible under multiple URLs (e.g. with/without trailing slash) -->
     <link rel="canonical" href="https://xplorer2716.github.io/XplorerEditor.site/">
+
+    <!-- ═══════════════════════════════════════════════════════
+         OPEN GRAPH (Facebook, LinkedIn, Slack, etc.)
+         Controls the rich preview card when this URL is shared
+         on social platforms that support the OG protocol.
+    ═══════════════════════════════════════════════════════ -->
     <meta property="og:site_name" content="Xplorer">
-    <meta property="og:title" content="Xplorer — Oberheim Xpander & Matrix-12 Editor">
+    <!-- og:title – headline shown in the card (can differ slightly from <title>) -->
+    <meta property="og:title" content="Xplorer — Oberheim Xpander &amp; Matrix-12 Editor">
+    <!-- og:description – body text of the card -->
     <meta property="og:description"
         content="Real-time, bi-directional editor for Oberheim synthesizers. Live MIDI automation, patch management, SysEx backup and more.">
-    <meta property="og:type" content="software">
+    <!-- og:type "website" is the correct value for a product/landing page -->
+    <meta property="og:type" content="website">
+    <!-- og:url – canonical URL repeated here for OG consumers -->
     <meta property="og:url" content="https://xplorer2716.github.io/XplorerEditor.site/">
+    <!-- og:image – must be ≥ 1200×630 px for best results; JPEG preferred -->
     <meta property="og:image" content="https://xplorer2716.github.io/XplorerEditor.site/index_files/header.jpg">
+
+    <!-- ═══════════════════════════════════════════════════════
+         TWITTER CARD
+         Controls the rich preview on Twitter/X.
+         "summary_large_image" renders a prominent banner image.
+    ═══════════════════════════════════════════════════════ -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Xplorer — Oberheim Xpander & Matrix-12 Editor">
+    <meta name="twitter:title" content="Xplorer — Oberheim Xpander &amp; Matrix-12 Editor">
     <meta name="twitter:description"
         content="Real-time, bi-directional editor for Oberheim synthesizers. Live MIDI automation, patch management, SysEx backup and more.">
     <meta name="twitter:image" content="https://xplorer2716.github.io/XplorerEditor.site/index_files/header.jpg">
+
+    <!-- ═══════════════════════════════════════════════════════
+         THEME COLOR
+         Sets the browser chrome / address-bar color on mobile
+         (Android Chrome, Samsung Browser, etc.).
+         Matches the dark header background for a cohesive look.
+    ═══════════════════════════════════════════════════════ -->
+    <meta name="theme-color" content="#373536">
+
+    <!-- ═══════════════════════════════════════════════════════
+         FAVICON
+         Using the header image as a temporary favicon.
+         Ideally replace with a dedicated 32×32 or 64×64 PNG.
+    ═══════════════════════════════════════════════════════ -->
     <link rel="icon" href="index_files/header.jpg" type="image/jpeg">
+
+    <!-- ═══════════════════════════════════════════════════════
+         PERFORMANCE: PRECONNECT
+         Establishes early TCP/TLS connections to third-party
+         origins before the browser needs their resources,
+         reducing connection setup latency.
+    ═══════════════════════════════════════════════════════ -->
+    <!-- YouTube embeds load resources from these two origins -->
+    <link rel="preconnect" href="https://www.youtube.com">
+    <link rel="preconnect" href="https://i.ytimg.com">
+
+    <!-- ═══════════════════════════════════════════════════════
+         STYLESHEET
+         Single external stylesheet for all visual styles.
+         Placed in <head> so styles are applied before render.
+    ═══════════════════════════════════════════════════════ -->
     <link rel="stylesheet" href="index_files/styles.css">
+
+    <!-- ═══════════════════════════════════════════════════════
+         STRUCTURED DATA (JSON-LD)
+         Machine-readable schema.org markup gives search engines
+         rich contextual information about this page and product.
+         Uses @graph to declare two complementary types:
+           • WebSite  – describes the site itself
+           • SoftwareApplication – describes Xplorer as a product
+    ═══════════════════════════════════════════════════════ -->
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
@@ -68,9 +171,29 @@
 
 <body>
 
+    <!-- ═══════════════════════════════════════════════════════
+         SKIP TO MAIN CONTENT (WCAG 2.4.1 – Bypass Blocks)
+         A visually hidden link that becomes visible on keyboard
+         focus, allowing keyboard-only users and screen-reader
+         users to jump past the repeated navigation directly to
+         the main content area. Required for WCAG 2.1 AA.
+    ═══════════════════════════════════════════════════════ -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SITE HEADER
+         Contains the product logo (branding image) and primary
+         navigation. The <header> landmark helps screen readers
+         and assistive technologies identify the banner region.
+         The <h1> is visually hidden (sr-only) but remains in
+         the DOM for search-engine indexing and screen readers.
+    ═══════════════════════════════════════════════════════ -->
     <header class="site-header">
         <img src="index_files/header.jpg" alt="Xplorer Logo" class="header-logo">
+        <!-- h1 is visually hidden via sr-only CSS class but present for SEO and
+             screen readers. The logo image provides the visual heading. -->
         <h1 class="site-title">Xplorer — Oberheim Xpander &amp; Matrix-12 Editor</h1>
+        <!-- Primary navigation: aria-label distinguishes it from any secondary navs -->
         <nav class="header-nav" aria-label="Main navigation">
             <a href="#main-features">Main Features</a>
             <a href="#videos">Videos</a>
@@ -78,22 +201,43 @@
         </nav>
     </header>
 
-    <main>
+    <!-- ═══════════════════════════════════════════════════════
+         MAIN CONTENT
+         The <main> landmark identifies the primary content area.
+         id="main-content" is the skip-link target (WCAG 2.4.1).
+         aria-label provides an accessible name for the landmark.
+    ═══════════════════════════════════════════════════════ -->
+    <main id="main-content" aria-label="Main content">
+        <!-- ─── HERO SECTION ─────────────────────────────────
+             Full-width screenshot of the Xplorer UI with CTA
+             buttons. No headline text here – the screenshot and
+             buttons speak for themselves. Wrapped in a section
+             with generous padding for visual breathing room.
+        ──────────────────────────────────────────────────── -->
         <div class="container">
-            <section class="section">
+            <section class="section" aria-labelledby="hero-heading">
+                <!-- Visually hidden heading for screen readers / outline navigation -->
+                <h2 id="hero-heading" class="sr-only">Xplorer Editor Interface</h2>
 
+                <!-- Hero screenshot: clicking opens the full-resolution version
+                     in a new context. loading="lazy" defers off-screen load. -->
                 <div class="hero-image-wrapper">
-                    <a title="Xplorer"
+                    <a title="View full-size Xplorer interface screenshot"
                         href="https://xplorer2716.github.io/XplorerEditor.site/images/XplorerFullScreen.jpg">
-                        <img class="hero-image" src="index_files/XplorerFullScreenSmall.jpg" alt="Xplorer Interface">
+                        <img class="hero-image" src="index_files/XplorerFullScreenSmall.jpg"
+                            alt="Xplorer Editor: full-screen view of all 226 synthesizer parameters"
+                            loading="lazy">
                     </a>
                 </div>
-                <!-- Ajout des boutons -->
+
+                <!-- CTA buttons: primary action = Download, secondary = GitHub source -->
                 <div class="button-container">
+                    <!-- Opens GitHub in a new tab; rel prevents tab-napping -->
                     <a href="https://github.com/xplorer2716/XplorerEditor" class="button button-secondary"
-                        target="_blank">
+                        target="_blank" rel="noopener noreferrer" aria-label="View Xplorer source code on GitHub">
+                        <!-- GitHub Mark SVG icon (MIT-licensed, from github.com/logos) -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-github" viewBox="0 0 16 16">
+                            class="bi bi-github" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
                             <path
                                 d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z">
                             </path>
@@ -101,18 +245,24 @@
                         GitHub
                     </a>
                     <a href="https://github.com/xplorer2716/XplorerEditor/releases/latest"
-                        class="button button-primary">Download</a>
+                        class="button button-primary" aria-label="Download the latest release of Xplorer">Download</a>
                 </div>
             </section>
         </div>
 
+        <!-- ─── PRODUCT DESCRIPTION ───────────────────────────
+             Several paragraphs of prose explaining what Xplorer
+             is and why it stands apart from generic editors.
+             White background provides visual contrast against the
+             hero grey.
+        ──────────────────────────────────────────────────── -->
         <div class="description-section">
             <div class="container">
                 <div class="description-content">
                     <p>Xplorer is a real-time and bi-directional software editor for the Oberheim Matrix-12 and Xpander
                         synthesizers.</p>
                     <p>Xplorer is not just another generic synthesizer
-                        editor with ranges of slider controls that are all the same and don’t
+                        editor with ranges of slider controls that are all the same and don't
                         really tell you what you are doing. Xplorer was developed by an Xpander
                         owner for use by Xpander and Matrix-12 owners. With Xplorer you quickly
                         get an overview of all parameters of a single patch, including an
@@ -120,9 +270,9 @@
                     <p>With Xplorer you can tweak the sound simultaneously
                         using a computer mouse, a hardware MIDI controller, your DAW software,
                         or directly on your Xpander or Matrix-12. Use the method you prefer to
-                        change the sound. Xplorer’s display shows you in real-time which
+                        change the sound. Xplorer's display shows you in real-time which
                         parameter is currently being modified.</p>
-                    <p>“Real-time and bi-directional” means that every
+                    <p>"Real-time and bi-directional" means that every
                         change you make in Xplorer is reflected into the synthesizer memory with
                         minimal latency, and vice-versa. Whether you change the sound
                         parameters on the synthesizer, in Xplorer, or with a MIDI controller,
@@ -133,13 +283,21 @@
             </div>
         </div>
 
+
+    <!-- ─── MAIN FEATURES ────────────────────────────────────
+         Bulleted list of the key Xplorer capabilities.
+         Uses <section id="main-features"> so the header nav
+         anchor (#main-features) scrolls directly here.
+         <ul> with list items is semantically correct for a
+         feature list and is fully accessible to screen readers.
+    ──────────────────────────────────────────────────── -->
     <div id="main-features" class="features-section">
             <div class="container">
                 <h2 class="section-headline">Main Features</h2>
-                <ul class="features-grid">
+                <ul class="features-grid" aria-label="List of Xplorer main features">
                     <li class="feature-item">Single patch tone file load/save on disk</li>
-                    <li class="feature-item">Extract single patches from a "all data data dump" SysEx file</li>
-                    <li class="feature-item">Get all single patches from synthesizer into a given folder</li>
+                    <li class="feature-item">Extract single patches from an "all data dump" SysEx file</li>
+                    <li class="feature-item">Get all single patches from the synthesizer into a given folder</li>
                     <li class="feature-item">All data dump request backup and restore</li>
                     <li class="feature-item">Modification of the 226 parameters of a single patch</li>
                     <li class="feature-item">Real-time MIDI automation for all parameters</li>
@@ -152,38 +310,42 @@
             </div>
         </div>
 
+    <!-- ─── VIDEOS ───────────────────────────────────────────
+         YouTube embeds showcasing Xplorer in action.
+         Each iframe includes: title (accessibility), loading="lazy"
+         (performance), and the standard allow + allowfullscreen
+         attributes. The responsive wrapper (padding-bottom trick)
+         preserves 16:9 aspect ratio at any container width.
+    ──────────────────────────────────────────────────── -->
     <div id="videos" class="videos-section">
             <div class="container">
                 <h2 class="section-headline">Videos</h2>
                 <div class="videos-grid">
                     <div class="video-item">
-                        <div class="video-wrapper"
-                            style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
+                        <!-- 16:9 responsive iframe container using the padding-bottom technique -->
+                        <div class="video-wrapper">
                             <iframe src="https://www.youtube.com/embed/Piyvk-KTlwE"
-                                title="Oberheim XPander + Xplorer : sweet electro lead" frameborder="0"
+                                title="Oberheim XPander + Xplorer: sweet electro lead – demo video" frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen loading="lazy"
-                                style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                                allowfullscreen loading="lazy"></iframe>
                         </div>
                         <p class="video-caption">Oberheim XPander + Xplorer : sweet electro lead</p>
                     </div>
                     <div class="video-item">
-                        <div class="video-wrapper"
-                            style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
-                            <iframe src="https://www.youtube.com/embed/EXU5P_lvqXM" title="Firechild - The Last Emperor"
-                                frameborder="0"
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/EXU5P_lvqXM"
+                                title="Firechild - The Last Emperor – Oberheim Xpander demo video" frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen loading="lazy"
-                                style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                                allowfullscreen loading="lazy"></iframe>
                         </div>
                         <p class="video-caption">Firechild - The Last Emperor</p>
                     </div>
-                    <!-- Ajout des boutons -->
+                    <!-- CTA buttons repeated below videos for user convenience -->
                     <div class="button-container">
                         <a href="https://github.com/xplorer2716/XplorerEditor" class="button button-secondary"
-                            target="_blank">
+                            target="_blank" rel="noopener noreferrer" aria-label="View Xplorer source code on GitHub">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-github" viewBox="0 0 16 16">
+                                class="bi bi-github" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
                                 <path
                                     d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z">
                                 </path>
@@ -191,165 +353,179 @@
                             GitHub
                         </a>
                         <a href="https://github.com/xplorer2716/XplorerEditor/releases/latest"
-                            class="button button-primary">Download</a>
+                            class="button button-primary" aria-label="Download the latest release of Xplorer">Download</a>
                     </div>
                 </div>
             </div>
         </div>
 
+
+    <!-- ─── RESOURCES ────────────────────────────────────────
+         Downloadable documents and external links for Xpander /
+         Matrix-12 owners. Organised into three sub-sections:
+           1. Manuals    – official Oberheim documentation
+           2. Hardware   – chip datasheets, display spec, etc.
+           3. Sound prog – LFO-to-BPM conversion chart
+         Tables provide a clear, scannable layout for file lists.
+         Descriptive anchor text improves SEO over generic "link".
+         External links use rel="noopener noreferrer" for security.
+    ──────────────────────────────────────────────────── -->
     <div id="resources" class="resources-section">
             <div class="container">
                 <h2 class="section-headline">Oberheim Xpander/Matrix-12 resources</h2>
 
+                <!-- Sub-section: Manuals -->
                 <div class="resource-subsection">
                     <h3 class="subsection-headline">Manuals</h3>
                     <p class="description-text">User and service manuals</p>
 
                     <table class="resource-table">
-                        <!--
-                        <thead>
-                            <tr>
-                                <th>Description</th>
-                                <th>Link</th>
-                            </tr>
-                        </thead>
-                    -->
                         <tbody>
                             <tr>
                                 <td><b>Xpander</b> owner's manual</td>
                                 <td><a href="https://xplorer2716.github.io/XplorerEditor.site/files/OberheimXpander-OwnersManual.rar"
-                                        class="download-link" title="Xpander owner's manual">link</a></td>
+                                        class="download-link" title="Download Xpander owner's manual (RAR archive)">Download RAR</a></td>
                             </tr>
                             <tr>
                                 <td><b>Xpander</b> service manual</td>
                                 <td><a href="https://xplorer2716.github.io/XplorerEditor.site/files/OberheimXpander-ServiceManual.rar"
-                                        class="download-link" title="Xpander service manual">link</a></td>
+                                        class="download-link" title="Download Xpander service manual (RAR archive)">Download RAR</a></td>
                             </tr>
                             <tr>
                                 <td><b>Matrix-12</b> owner's manual</td>
                                 <td><a href="https://xplorer2716.github.io/XplorerEditor.site/files/OberheimMatrix12-OwnersManual.rar"
-                                        class="download-link" title="Matrix-12 owner's manual">link</a></td>
+                                        class="download-link" title="Download Matrix-12 owner's manual (RAR archive)">Download RAR</a></td>
                             </tr>
                             <tr>
                                 <td><b>Matrix-12</b> preliminary operation guide</td>
-                                <td><a href="https://xplorer2716.github.io/XplorerEditor.site/files/files/matrix12preliminaryoperationguide.rar"
-                                        class="download-link" title="Matrix-12 preliminary operation guide">link</a>
+                                <td><a href="https://xplorer2716.github.io/XplorerEditor.site/files/matrix12preliminaryoperationguide.rar"
+                                        class="download-link" title="Download Matrix-12 preliminary operation guide (RAR archive)">Download RAR</a>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
+                <!-- Sub-section: Hardware docs and chip datasheets -->
                 <div class="resource-subsection">
                     <h3 class="subsection-headline">Hardware</h3>
-                    <p class="description-text">Docs and infos about Xpander/Matrix-12 hardware</p>
+                    <p class="description-text">Documentation and information about Xpander/Matrix-12 hardware</p>
 
                     <table class="resource-table">
-                        <!--
-                        <thead>
-                            <tr>
-                                <th>Description</th>
-                                <th>Link</th>
-                            </tr>
-                        </thead>
-                    -->
                         <tbody>
                             <tr>
                                 <td><b>CEM 3372</b> (VCF) datasheet</td>
                                 <td><a href="https://xplorer2716.github.io/XplorerEditor.site/files/Xpander CEM 3372.rar"
-                                        class="download-link" title="CEM 3372 (VCF) datasheet">link</a></td>
+                                        class="download-link" title="Download CEM 3372 VCF datasheet (RAR archive)">Download RAR</a></td>
                             </tr>
                             <tr>
                                 <td><b>CEM 3374</b> (VCO) datasheet</td>
                                 <td><a href="https://xplorer2716.github.io/XplorerEditor.site/files/Xpander CEM 3374.rar"
-                                        class="download-link" title="CEM 3374 (VCO) datasheet">link</a></td>
+                                        class="download-link" title="Download CEM 3374 VCO datasheet (RAR archive)">Download RAR</a></td>
                             </tr>
                             <tr>
-                                <td><b>SIPEX HS3140/SP7514</b> 14 bits DAC</td>
+                                <td>                                <b>SIPEX HS3140/SP7514</b> 14-bit DAC</td>
                                 <td><a href="https://xplorer2716.github.io/XplorerEditor.site/files/sipex 14 bits dac - hs3140c3q.pdf"
-                                        class="download-link" title="SIPEX HS3140/SP7514 14 bits DAC">link</a></td>
+                                        class="download-link" title="Download SIPEX HS3140 14-bit DAC datasheet (PDF)">Download PDF</a></td>
                             </tr>
                             <tr>
-                                <td><b>SIPEX HS3140/SP7514</b> 14 bits DAC (alt)</td>
+                                                                <td><b>SIPEX HS3140/SP7514</b> 14-bit DAC (alt)</td>
                                 <td><a href="https://xplorer2716.github.io/XplorerEditor.site/files/sipex 14 bits dac - hs3140c3q_bis.pdf"
-                                        class="download-link" title="SIPEX HS3140/SP7514 14 bits DAC (alt)">link</a>
+                                        class="download-link" title="Download SIPEX HS3140 14-bit DAC alternate datasheet (PDF)">Download PDF</a>
                                 </td>
                             </tr>
                             <tr>
                                 <td><b>FG405A2</b> VFD Display</td>
                                 <td><a href="https://xplorer2716.github.io/XplorerEditor.site/files/Xpander_Display_Spec_FG405A2.rar"
-                                    class="download-link" title="FG405A2 Display">link</a></td>
+                                    class="download-link" title="Download FG405A2 VFD Display specification (RAR archive)">Download RAR</a></td>
                             </tr>
                             <tr>
-                                <td><b>Encoders replacement</b><p></p>
-                                  <img src="files/EncoderReplacement.JPG" alt="Xpander LFO rate to BPM conversion chart">  
+                                <!-- Encoder replacement section: image shows the correct replacement part -->
+                                <td><b>Encoders replacement</b>
+                                  <img src="files/EncoderReplacement.JPG" alt="Photo of the Bourns PEC09 encoder used as a replacement in the Xpander" loading="lazy" class="resource-inline-img">
                                 </td>
                                 <td><a href="https://xplorer2716.github.io/XplorerEditor.site/files/bourn-PEC09-2325K-N0015.pdf"
-                                        class="download-link" title="PEC09-2325K-N0015">link</a></td>
+                                        class="download-link" title="Download Bourns PEC09-2325K-N0015 encoder datasheet (PDF)">Download PDF</a></td>
 
-                            </tr>    
-                                <tr>
-                                <td>redshift-consulting Oberheim Xpander</td>
+                            </tr>
+                            <tr>
+                                <td>Redshift Consulting Oberheim Xpander resource page</td>
                                 <td><a href="https://www.redshift-consulting.com/oberheim-xpander.html"
-                                        class="download-link" title="PEC09-2325K-N0015">link</a></td>
+                                        class="download-link" title="Redshift Consulting – Oberheim Xpander resources"
+                                        target="_blank" rel="noopener noreferrer">Visit page</a></td>
 
-                            </tr>                         
+                            </tr>
                         </tbody>
                     </table>
                 </div>
+
+               <!-- Sub-section: Sound programming reference -->
                <div class="resource-subsection">
                     <h3 class="subsection-headline">Sound programming</h3>
                     <p class="description-text">LFO speed to BPM conversion</p>
-     
-                    <img src="https://xplorer2716.github.io/XplorerEditor.site/files/XpanderLFoRateToBpm.jpg" alt="Xpander LFO rate to BPM conversion chart" class="resource-img">
-                             
+                    <!-- Conversion chart image: lazy-loaded as it is below the fold -->
+                    <img src="https://xplorer2716.github.io/XplorerEditor.site/files/XpanderLFoRateToBpm.jpg"
+                        alt="Xpander LFO rate to BPM conversion chart – mapping LFO speed values to beats per minute"
+                        class="resource-img" loading="lazy">
                 </div>
             </div>
         </div>
 
     </main>
 
+    <!-- ─── SITE FOOTER ──────────────────────────────────────
+         Matches the dark header for visual bookending.
+         Contains copyright and a link to the GitHub project.
+    ──────────────────────────────────────────────────── -->
     <footer class="site-footer">
         <div class="container">
             <p>© Xplorer — real-time Oberheim Xpander &amp; Matrix-12 editor. Visit the <a
-                    href="https://github.com/xplorer2716/XplorerEditor">project on GitHub</a> for downloads and source code
+                    href="https://github.com/xplorer2716/XplorerEditor"
+                    target="_blank" rel="noopener noreferrer">project on GitHub</a> for downloads and source code
             </p>
         </div>
     </footer>
-</body>
 
-<!-- Ensure header is never smaller than the header image: set min-height dynamically -->
-<script>
-    (function() {
-        function ensureHeaderMin() {
-            var img = document.querySelector('.site-header .header-logo');
-            var header = document.querySelector('.site-header');
-            if (!img || !header) return;
+    <!-- ═══════════════════════════════════════════════════════
+         INLINE SCRIPT – header min-height guard
+         Ensures the header is never shorter than the logo image
+         once it has loaded, preventing a visual jump on slow
+         connections. Uses getBoundingClientRect() so it respects
+         responsive CSS scaling. Also re-runs on window resize.
+         Placed just before </body> (after all HTML) so the DOM
+         elements already exist when the script runs.
+    ═══════════════════════════════════════════════════════ -->
+    <script>
+        (function() {
+            function ensureHeaderMin() {
+                var img = document.querySelector('.site-header .header-logo');
+                var header = document.querySelector('.site-header');
+                if (!img || !header) return;
 
-            // Use rendered height so it matches CSS scaling (device width, responsive).
-            var h = img.getBoundingClientRect().height || img.naturalHeight || 0;
-            if (h > 0) {
-                header.style.minHeight = Math.ceil(h) + 'px';
+                // Use rendered height so it matches CSS scaling (device width, responsive).
+                var h = img.getBoundingClientRect().height || img.naturalHeight || 0;
+                if (h > 0) {
+                    header.style.minHeight = Math.ceil(h) + 'px';
+                }
             }
-        }
 
-        // Run when image loads (covers cached and fresh loads)
-        var logo = document.querySelector('.site-header .header-logo');
-        if (logo) {
-            if (logo.complete) {
-                ensureHeaderMin();
-            } else {
-                logo.addEventListener('load', ensureHeaderMin);
+            // Run when image loads (covers cached and fresh loads)
+            var logo = document.querySelector('.site-header .header-logo');
+            if (logo) {
+                if (logo.complete) {
+                    ensureHeaderMin();
+                } else {
+                    logo.addEventListener('load', ensureHeaderMin);
+                }
             }
-        }
 
-        // Also adjust on window resize (responsive layouts)
-        window.addEventListener('resize', function() {
-            // small timeout to let layout settle
-            setTimeout(ensureHeaderMin, 50);
-        });
-    })();
-</script>
+            // Also adjust on window resize (responsive layouts)
+            window.addEventListener('resize', function() {
+                // small timeout to let layout settle
+                setTimeout(ensureHeaderMin, 50);
+            });
+        })();
+    </script>
 
 </body>
 

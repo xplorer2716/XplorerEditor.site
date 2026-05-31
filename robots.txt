@@ -1,5 +1,13 @@
+# robots.txt – Xplorer Editor site
+# https://xplorer2716.github.io/XplorerEditor.site/
+#
+# Allow all well-behaved crawlers to index the entire site.
+# No sections need to be blocked for this public product page.
+# The Sitemap directive helps crawlers discover the sitemap
+# without relying on manual submission.
+
 User-agent: *
 Allow: /
 
+# Sitemap location – absolute URL required by the protocol
 Sitemap: https://xplorer2716.github.io/XplorerEditor.site/sitemap.xml
-# Crawl-delay can be added if the host needs it; keep default for now.
