@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -24,8 +24,14 @@
     <meta name="twitter:description"
         content="Real-time, bi-directional editor for Oberheim synthesizers. Live MIDI automation, patch management, SysEx backup and more.">
     <meta name="twitter:image" content="https://xplorer2716.github.io/XplorerEditor.site/index_files/header.jpg">
+    <meta name="theme-color" content="#e7e8e9">
     <link rel="icon" href="index_files/header.jpg" type="image/jpeg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Geist:wght@300..600&family=Geist+Mono:wght@400..500&family=Inter:wght@300..600&display=swap">
     <link rel="stylesheet" href="index_files/styles.css">
+    <script>document.documentElement.classList.remove('no-js');</script>
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
@@ -68,288 +74,491 @@
 
 <body>
 
-    <header class="site-header">
-        <img src="index_files/header.jpg" alt="Xplorer Logo" class="header-logo">
-        <h1 class="site-title">Xplorer — Oberheim Xpander &amp; Matrix-12 Editor</h1>
-        <nav class="header-nav" aria-label="Main navigation">
-            <a href="#main-features">Main Features</a>
-            <a href="#videos">Videos</a>
-            <a href="#resources">Oberheim Xpander/Matrix-12 resources</a>
-        </nav>
+    <!-- Shared icon: arrow up-right, used by every link row -->
+    <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+        <symbol id="arrow-ur" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17 17 7" />
+            <path d="M8 7h9v9" />
+        </symbol>
+    </svg>
+
+    <!-- Floating dock navigation -->
+    <nav class="dock" aria-label="Main navigation">
+        <div class="dock__inner">
+            <a class="dock__mark" href="#top" aria-label="Xplorer — back to top">X</a>
+            <a class="dock__link" href="#features">Features</a>
+            <a class="dock__link" href="#videos">Videos</a>
+            <a class="dock__link dock__link--optional" href="#resources">Resources</a>
+            <a class="dock__link dock__link--optional" href="https://github.com/xplorer2716/XplorerEditor"
+                target="_blank" rel="noopener">GitHub</a>
+            <a class="dock__cta" href="https://github.com/xplorer2716/XplorerEditor/releases/latest" target="_blank"
+                rel="noopener">Download</a>
+        </div>
+    </nav>
+
+    <header class="topbar" id="top">
+        <div class="wrap topbar__inner">
+            <a class="wordmark" href="#top">Xplorer<sup>®</sup></a>
+            <p class="topbar__meta">Oberheim Xpander<br>&amp; Matrix-12</p>
+        </div>
     </header>
 
     <main>
-        <div class="container">
-            <section class="section">
 
-                <div class="hero-image-wrapper">
-                    <a title="Xplorer"
-                        href="https://xplorer2716.github.io/XplorerEditor.site/images/XplorerFullScreen.jpg">
-                        <img class="hero-image" src="index_files/XplorerFullScreenSmall.jpg" alt="Xplorer Interface">
-                    </a>
+        <!-- ============================================================ Hero -->
+        <section class="section section--hero">
+            <div class="wrap">
+                <div class="reveal">
+                    <h1 class="hero__title">Xplorer<sup>®</sup> is a real-time, bi-directional editor for the Oberheim
+                        Xpander and Matrix-12.</h1>
                 </div>
-                <!-- Ajout des boutons -->
-                <div class="button-container">
-                    <a href="https://github.com/xplorer2716/XplorerEditor" class="button button-secondary"
-                        target="_blank">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-github" viewBox="0 0 16 16">
-                            <path
-                                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z">
-                            </path>
-                        </svg>
-                        GitHub
-                    </a>
-                    <a href="https://github.com/xplorer2716/XplorerEditor/releases/latest"
-                        class="button button-primary">Download</a>
-                </div>
-            </section>
-        </div>
-
-        <div class="description-section">
-            <div class="container">
-                <div class="description-content">
-                    <p>Xplorer is a real-time and bi-directional software editor for the Oberheim Matrix-12 and Xpander
-                        synthesizers.</p>
-                    <p>Xplorer is not just another generic synthesizer
-                        editor with ranges of slider controls that are all the same and don’t
-                        really tell you what you are doing. Xplorer was developed by an Xpander
-                        owner for use by Xpander and Matrix-12 owners. With Xplorer you quickly
-                        get an overview of all parameters of a single patch, including an
-                        overview of the Modulation Matrix.</p>
-                    <p>With Xplorer you can tweak the sound simultaneously
-                        using a computer mouse, a hardware MIDI controller, your DAW software,
-                        or directly on your Xpander or Matrix-12. Use the method you prefer to
-                        change the sound. Xplorer’s display shows you in real-time which
-                        parameter is currently being modified.</p>
-                    <p>“Real-time and bi-directional” means that every
-                        change you make in Xplorer is reflected into the synthesizer memory with
-                        minimal latency, and vice-versa. Whether you change the sound
-                        parameters on the synthesizer, in Xplorer, or with a MIDI controller,
-                        the software and the synthesizer will simultaneously update the
-                        parameters of the sound, without needing to reload the patch into the
-                        synthesizer memory.</p>
+                <div class="reveal">
+                    <p class="hero__meta">
+                        <span>Free &amp; open source</span>
+                        <span>226 parameters</span>
+                        <span>SysEx librarian</span>
+                    </p>
                 </div>
             </div>
-        </div>
 
-    <div id="main-features" class="features-section">
-            <div class="container">
-                <h2 class="section-headline">Main Features</h2>
-                <ul class="features-grid">
-                    <li class="feature-item">Single patch tone file load/save on disk</li>
-                    <li class="feature-item">Extract single patches from a "all data data dump" SysEx file</li>
-                    <li class="feature-item">Get all single patches from synthesizer into a given folder</li>
-                    <li class="feature-item">All data dump request backup and restore</li>
-                    <li class="feature-item">Modification of the 226 parameters of a single patch</li>
-                    <li class="feature-item">Real-time MIDI automation for all parameters</li>
-                    <li class="feature-item">Copy/paste for TRACK, ENV, LFO, and RAMP pages</li>
-                    <li class="feature-item">Rename, go to, store, and save patches</li>
-                    <li class="feature-item">Real-time update of all parameters when tweaking synth knobs</li>
-                    <li class="feature-item">Patch randomizer for generating new sounds</li>
-                    <li class="feature-item">Auto-sized user interface</li>
-                </ul>
+            <div class="marquee" aria-hidden="true">
+                <div class="marquee__track">
+                    <span class="marquee__item">226 Parameters</span>
+                    <span class="marquee__item">Real-time SysEx</span>
+                    <span class="marquee__item">Bi-directional</span>
+                    <span class="marquee__item">MIDI automation</span>
+                    <span class="marquee__item">Patch librarian</span>
+                    <span class="marquee__item">Modulation matrix</span>
+                    <span class="marquee__item">All-data backup</span>
+                    <span class="marquee__item">Patch randomizer</span>
+                    <span class="marquee__item">Open source</span>
+                    <span class="marquee__item">226 Parameters</span>
+                    <span class="marquee__item">Real-time SysEx</span>
+                    <span class="marquee__item">Bi-directional</span>
+                    <span class="marquee__item">MIDI automation</span>
+                    <span class="marquee__item">Patch librarian</span>
+                    <span class="marquee__item">Modulation matrix</span>
+                    <span class="marquee__item">All-data backup</span>
+                    <span class="marquee__item">Patch randomizer</span>
+                    <span class="marquee__item">Open source</span>
+                </div>
             </div>
-        </div>
+        </section>
 
-    <div id="videos" class="videos-section">
-            <div class="container">
-                <h2 class="section-headline">Videos</h2>
-                <div class="videos-grid">
-                    <div class="video-item">
-                        <div class="video-wrapper"
-                            style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
+        <!-- ======================================================= Interface -->
+        <section class="section section--tight" id="interface">
+            <div class="wrap">
+                <p class="eyebrow">01 / The editor</p>
+                <div class="reveal">
+                    <h2 class="headline">One window.<br>Every parameter.</h2>
+                </div>
+
+                <a class="media" style="margin-top:2.5rem"
+                    href="https://xplorer2716.github.io/XplorerEditor.site/images/XplorerFullScreen.jpg"
+                    title="Open the full-size screenshot">
+                    <img src="images/XplorerFullScreen.jpg"
+                        alt="The Xplorer editor window showing oscillators, filter, envelopes, LFOs, ramps, tracking generators and the modulation matrix"
+                        width="1260" height="840">
+                </a>
+                <p class="media__caption">
+                    <span>Xplorer main window</span>
+                    <span>Click to enlarge</span>
+                </p>
+            </div>
+        </section>
+
+        <!-- ======================================================== Overview -->
+        <section class="section" id="overview">
+            <div class="wrap split">
+                <div class="split__aside">
+                    <p class="eyebrow">02 / Overview</p>
+                    <div class="reveal">
+                        <h2 class="headline">Not another generic editor.</h2>
+                    </div>
+                </div>
+                <div class="split__body">
+                    <p class="lead">Xplorer is not just another generic synthesizer editor with rows of identical
+                        sliders that never really tell you what you are doing. It was developed by an Xpander owner, for
+                        Xpander and Matrix-12 owners.</p>
+                    <p class="lead">With Xplorer you get an immediate overview of every parameter of a single patch,
+                        including the full Modulation Matrix — laid out the way the instrument actually works.</p>
+                    <p class="lead">Tweak the sound with a mouse, a hardware MIDI controller, your DAW, or directly on
+                        the front panel of your Xpander or Matrix-12. Use whichever method you prefer: the display shows
+                        you in real time which parameter is being modified.</p>
+                    <p class="lead">“Real-time and bi-directional” means every change you make in Xplorer is written
+                        into the synthesizer memory with minimal latency, and vice-versa — no reloading the patch, ever.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================== Hardware -->
+        <section class="section section--tight" id="hardware">
+            <div class="wrap">
+                <p class="eyebrow">03 / The instruments</p>
+                <div class="media-grid">
+                    <figure style="margin:0">
+                        <span class="media media--muted media--cover">
+                            <img src="images/oberheim-matrix12.jpg"
+                                alt="Oberheim Matrix-12 synthesizer, front panel and keyboard" loading="lazy"
+                                width="1600" height="1067">
+                        </span>
+                        <figcaption class="media__caption">
+                            <span>Oberheim Matrix-12</span>
+                            <span>1985</span>
+                        </figcaption>
+                    </figure>
+                    <figure style="margin:0">
+                        <span class="media media--muted media--cover">
+                            <img src="images/studio-rack.jpg"
+                                alt="An Oberheim Xpander sitting on a studio stack of vintage synthesizers"
+                                loading="lazy" width="1080" height="810">
+                        </span>
+                        <figcaption class="media__caption">
+                            <span>Xpander in the rack</span>
+                            <span>1984</span>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================== Features -->
+        <section class="section" id="features">
+            <div class="wrap split">
+                <div class="split__aside">
+                    <p class="eyebrow">04 / Capabilities</p>
+                    <div class="reveal">
+                        <h2 class="headline">Main features</h2>
+                    </div>
+                </div>
+                <div class="split__body">
+                    <ul class="numbered">
+                        <li>
+                            <div class="numbered__item">
+                                <h3 class="numbered__title"><span class="numbered__num">01</span> Patch files</h3>
+                                <p class="numbered__desc">Load and save a single patch tone file straight to disk.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="numbered__item">
+                                <h3 class="numbered__title"><span class="numbered__num">02</span> SysEx extraction</h3>
+                                <p class="numbered__desc">Pull individual patches out of an “all data” dump SysEx file.
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="numbered__item">
+                                <h3 class="numbered__title"><span class="numbered__num">03</span> Bulk retrieval</h3>
+                                <p class="numbered__desc">Get every single patch from the synthesizer into a folder of
+                                    your choice.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="numbered__item">
+                                <h3 class="numbered__title"><span class="numbered__num">04</span> Backup &amp; restore
+                                </h3>
+                                <p class="numbered__desc">Request, store and restore a complete all-data dump.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="numbered__item">
+                                <h3 class="numbered__title"><span class="numbered__num">05</span> 226 parameters</h3>
+                                <p class="numbered__desc">Every parameter of a single patch, editable from one screen.
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="numbered__item">
+                                <h3 class="numbered__title"><span class="numbered__num">06</span> MIDI automation</h3>
+                                <p class="numbered__desc">Real-time MIDI automation for all parameters, from a
+                                    controller or your DAW.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="numbered__item">
+                                <h3 class="numbered__title"><span class="numbered__num">07</span> Copy &amp; paste</h3>
+                                <p class="numbered__desc">Duplicate TRACK, ENV, LFO and RAMP pages in a couple of
+                                    clicks.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="numbered__item">
+                                <h3 class="numbered__title"><span class="numbered__num">08</span> Patch management</h3>
+                                <p class="numbered__desc">Rename, go to, store and save patches without leaving the
+                                    editor.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="numbered__item">
+                                <h3 class="numbered__title"><span class="numbered__num">09</span> Two-way tracking</h3>
+                                <p class="numbered__desc">Turn a knob on the synth and every parameter updates on screen
+                                    in real time.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="numbered__item">
+                                <h3 class="numbered__title"><span class="numbered__num">10</span> Randomizer</h3>
+                                <p class="numbered__desc">Generate new sounds with the built-in patch randomizer.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="numbered__item">
+                                <h3 class="numbered__title"><span class="numbered__num">11</span> Auto-sized UI</h3>
+                                <p class="numbered__desc">The user interface scales itself to fit your display.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================== Videos -->
+        <section class="section" id="videos">
+            <div class="wrap">
+                <p class="eyebrow">05 / In action</p>
+                <div class="reveal">
+                    <h2 class="headline">Videos</h2>
+                </div>
+
+                <div class="videos" style="margin-top:2.5rem">
+                    <div class="video">
+                        <div class="video__frame">
                             <iframe src="https://www.youtube.com/embed/Piyvk-KTlwE"
-                                title="Oberheim XPander + Xplorer : sweet electro lead" frameborder="0"
+                                title="Oberheim XPander + Xplorer: sweet electro lead"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen loading="lazy"
-                                style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                                allowfullscreen loading="lazy"></iframe>
                         </div>
-                        <p class="video-caption">Oberheim XPander + Xplorer : sweet electro lead</p>
+                        <p class="video__caption">Oberheim Xpander + Xplorer — sweet electro lead</p>
                     </div>
-                    <div class="video-item">
-                        <div class="video-wrapper"
-                            style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
-                            <iframe src="https://www.youtube.com/embed/EXU5P_lvqXM" title="Firechild - The Last Emperor"
-                                frameborder="0"
+                    <div class="video">
+                        <div class="video__frame">
+                            <iframe src="https://www.youtube.com/embed/EXU5P_lvqXM" title="Firechild — The Last Emperor"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen loading="lazy"
-                                style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                                allowfullscreen loading="lazy"></iframe>
                         </div>
-                        <p class="video-caption">Firechild - The Last Emperor</p>
+                        <p class="video__caption">Firechild — The Last Emperor</p>
                     </div>
-                    <!-- Ajout des boutons -->
-                    <div class="button-container">
-                        <a href="https://github.com/xplorer2716/XplorerEditor" class="button button-secondary"
-                            target="_blank">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-github" viewBox="0 0 16 16">
-                                <path
-                                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z">
-                                </path>
-                            </svg>
-                            GitHub
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================= Resources -->
+        <section class="section" id="resources">
+            <div class="wrap">
+                <p class="eyebrow">06 / Reference</p>
+                <div class="reveal">
+                    <h2 class="headline">Xpander &amp; Matrix-12<br>resources</h2>
+                </div>
+
+                <h3 class="group-title" style="margin-top:3.5rem">Manuals</h3>
+                <div class="rows">
+                    <a class="row"
+                        href="https://xplorer2716.github.io/XplorerEditor.site/files/OberheimXpander-OwnersManual.rar">
+                        <div>
+                            <h4 class="row__title">Owner's manual</h4>
+                            <div class="row__meta"><span>Xpander</span><span>RAR archive</span></div>
+                        </div>
+                        <svg class="row__arrow" aria-hidden="true">
+                            <use href="#arrow-ur" /></svg>
+                    </a>
+                    <a class="row"
+                        href="https://xplorer2716.github.io/XplorerEditor.site/files/OberheimXpander-ServiceManual.rar">
+                        <div>
+                            <h4 class="row__title">Service manual</h4>
+                            <div class="row__meta"><span>Xpander</span><span>RAR archive</span></div>
+                        </div>
+                        <svg class="row__arrow" aria-hidden="true">
+                            <use href="#arrow-ur" /></svg>
+                    </a>
+                    <a class="row"
+                        href="https://xplorer2716.github.io/XplorerEditor.site/files/OberheimMatrix12-OwnersManual.rar">
+                        <div>
+                            <h4 class="row__title">Owner's manual</h4>
+                            <div class="row__meta"><span>Matrix-12</span><span>RAR archive</span></div>
+                        </div>
+                        <svg class="row__arrow" aria-hidden="true">
+                            <use href="#arrow-ur" /></svg>
+                    </a>
+                    <a class="row"
+                        href="https://xplorer2716.github.io/XplorerEditor.site/files/matrix12preliminaryoperationguide.rar">
+                        <div>
+                            <h4 class="row__title">Preliminary operation guide</h4>
+                            <div class="row__meta"><span>Matrix-12</span><span>RAR archive</span></div>
+                        </div>
+                        <svg class="row__arrow" aria-hidden="true">
+                            <use href="#arrow-ur" /></svg>
+                    </a>
+                </div>
+
+                <h3 class="group-title">Hardware</h3>
+                <div class="rows">
+                    <a class="row" href="https://xplorer2716.github.io/XplorerEditor.site/files/Xpander CEM 3372.rar">
+                        <div>
+                            <h4 class="row__title">CEM 3372</h4>
+                            <div class="row__meta"><span>VCF datasheet</span><span>RAR archive</span></div>
+                        </div>
+                        <svg class="row__arrow" aria-hidden="true">
+                            <use href="#arrow-ur" /></svg>
+                    </a>
+                    <a class="row" href="https://xplorer2716.github.io/XplorerEditor.site/files/Xpander CEM 3374.rar">
+                        <div>
+                            <h4 class="row__title">CEM 3374</h4>
+                            <div class="row__meta"><span>VCO datasheet</span><span>RAR archive</span></div>
+                        </div>
+                        <svg class="row__arrow" aria-hidden="true">
+                            <use href="#arrow-ur" /></svg>
+                    </a>
+                    <a class="row"
+                        href="https://xplorer2716.github.io/XplorerEditor.site/files/sipex 14 bits dac - hs3140c3q.pdf">
+                        <div>
+                            <h4 class="row__title">SIPEX HS3140 / SP7514</h4>
+                            <div class="row__meta"><span>14-bit DAC</span><span>PDF</span></div>
+                        </div>
+                        <svg class="row__arrow" aria-hidden="true">
+                            <use href="#arrow-ur" /></svg>
+                    </a>
+                    <a class="row"
+                        href="https://xplorer2716.github.io/XplorerEditor.site/files/sipex 14 bits dac - hs3140c3q_bis.pdf">
+                        <div>
+                            <h4 class="row__title">SIPEX HS3140 / SP7514</h4>
+                            <div class="row__meta"><span>14-bit DAC, alternate</span><span>PDF</span></div>
+                        </div>
+                        <svg class="row__arrow" aria-hidden="true">
+                            <use href="#arrow-ur" /></svg>
+                    </a>
+                    <a class="row"
+                        href="https://xplorer2716.github.io/XplorerEditor.site/files/Xpander_Display_Spec_FG405A2.rar">
+                        <div>
+                            <h4 class="row__title">FG405A2</h4>
+                            <div class="row__meta"><span>VFD display spec</span><span>RAR archive</span></div>
+                        </div>
+                        <svg class="row__arrow" aria-hidden="true">
+                            <use href="#arrow-ur" /></svg>
+                    </a>
+                    <a class="row"
+                        href="https://xplorer2716.github.io/XplorerEditor.site/files/bourn-PEC09-2325K-N0015.pdf">
+                        <div>
+                            <h4 class="row__title">Bourns PEC09-2325K-N0015</h4>
+                            <div class="row__meta"><span>Encoder replacement</span><span>PDF</span></div>
+                        </div>
+                        <svg class="row__arrow" aria-hidden="true">
+                            <use href="#arrow-ur" /></svg>
+                    </a>
+                    <a class="row" href="https://www.redshift-consulting.com/oberheim-xpander.html" target="_blank"
+                        rel="noopener">
+                        <div>
+                            <h4 class="row__title">Redshift Consulting</h4>
+                            <div class="row__meta"><span>Oberheim Xpander notes</span><span>External site</span></div>
+                        </div>
+                        <svg class="row__arrow" aria-hidden="true">
+                            <use href="#arrow-ur" /></svg>
+                    </a>
+                </div>
+
+                <h3 class="group-title">Charts &amp; diagrams</h3>
+                <div class="media-grid">
+                    <figure style="margin:0">
+                        <a class="media" href="files/XpanderLFoRateToBpm.jpg" title="Open the full-size chart">
+                            <img src="files/XpanderLFoRateToBpm.jpg" alt="Xpander LFO rate to BPM conversion chart"
+                                loading="lazy" width="1218" height="357">
                         </a>
-                        <a href="https://github.com/xplorer2716/XplorerEditor/releases/latest"
-                            class="button button-primary">Download</a>
-                    </div>
+                        <figcaption class="media__caption">
+                            <span>LFO speed to BPM</span>
+                            <span>Sound programming</span>
+                        </figcaption>
+                    </figure>
+                    <figure style="margin:0">
+                        <a class="media" href="files/EncoderReplacement.JPG" title="Open the full-size note">
+                            <img src="files/EncoderReplacement.JPG"
+                                alt="Forum note by James R. Coplin explaining how to fit Bourns PEC09-2325K-N0015 encoders in place of the worn Xpander encoders"
+                                loading="lazy" width="620" height="605">
+                        </a>
+                        <figcaption class="media__caption">
+                            <span>Encoder replacement notes</span>
+                            <span>Hardware</span>
+                        </figcaption>
+                    </figure>
                 </div>
             </div>
-        </div>
+        </section>
 
-    <div id="resources" class="resources-section">
-            <div class="container">
-                <h2 class="section-headline">Oberheim Xpander/Matrix-12 resources</h2>
-
-                <div class="resource-subsection">
-                    <h3 class="subsection-headline">Manuals</h3>
-                    <p class="description-text">User and service manuals</p>
-
-                    <table class="resource-table">
-                        <!--
-                        <thead>
-                            <tr>
-                                <th>Description</th>
-                                <th>Link</th>
-                            </tr>
-                        </thead>
-                    -->
-                        <tbody>
-                            <tr>
-                                <td><b>Xpander</b> owner's manual</td>
-                                <td><a href="https://xplorer2716.github.io/XplorerEditor.site/files/OberheimXpander-OwnersManual.rar"
-                                        class="download-link" title="Xpander owner's manual">link</a></td>
-                            </tr>
-                            <tr>
-                                <td><b>Xpander</b> service manual</td>
-                                <td><a href="https://xplorer2716.github.io/XplorerEditor.site/files/OberheimXpander-ServiceManual.rar"
-                                        class="download-link" title="Xpander service manual">link</a></td>
-                            </tr>
-                            <tr>
-                                <td><b>Matrix-12</b> owner's manual</td>
-                                <td><a href="https://xplorer2716.github.io/XplorerEditor.site/files/OberheimMatrix12-OwnersManual.rar"
-                                        class="download-link" title="Matrix-12 owner's manual">link</a></td>
-                            </tr>
-                            <tr>
-                                <td><b>Matrix-12</b> preliminary operation guide</td>
-                                <td><a href="https://xplorer2716.github.io/XplorerEditor.site/files/files/matrix12preliminaryoperationguide.rar"
-                                        class="download-link" title="Matrix-12 preliminary operation guide">link</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="resource-subsection">
-                    <h3 class="subsection-headline">Hardware</h3>
-                    <p class="description-text">Docs and infos about Xpander/Matrix-12 hardware</p>
-
-                    <table class="resource-table">
-                        <!--
-                        <thead>
-                            <tr>
-                                <th>Description</th>
-                                <th>Link</th>
-                            </tr>
-                        </thead>
-                    -->
-                        <tbody>
-                            <tr>
-                                <td><b>CEM 3372</b> (VCF) datasheet</td>
-                                <td><a href="https://xplorer2716.github.io/XplorerEditor.site/files/Xpander CEM 3372.rar"
-                                        class="download-link" title="CEM 3372 (VCF) datasheet">link</a></td>
-                            </tr>
-                            <tr>
-                                <td><b>CEM 3374</b> (VCO) datasheet</td>
-                                <td><a href="https://xplorer2716.github.io/XplorerEditor.site/files/Xpander CEM 3374.rar"
-                                        class="download-link" title="CEM 3374 (VCO) datasheet">link</a></td>
-                            </tr>
-                            <tr>
-                                <td><b>SIPEX HS3140/SP7514</b> 14 bits DAC</td>
-                                <td><a href="https://xplorer2716.github.io/XplorerEditor.site/files/sipex 14 bits dac - hs3140c3q.pdf"
-                                        class="download-link" title="SIPEX HS3140/SP7514 14 bits DAC">link</a></td>
-                            </tr>
-                            <tr>
-                                <td><b>SIPEX HS3140/SP7514</b> 14 bits DAC (alt)</td>
-                                <td><a href="https://xplorer2716.github.io/XplorerEditor.site/files/sipex 14 bits dac - hs3140c3q_bis.pdf"
-                                        class="download-link" title="SIPEX HS3140/SP7514 14 bits DAC (alt)">link</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><b>FG405A2</b> VFD Display</td>
-                                <td><a href="https://xplorer2716.github.io/XplorerEditor.site/files/Xpander_Display_Spec_FG405A2.rar"
-                                    class="download-link" title="FG405A2 Display">link</a></td>
-                            </tr>
-                            <tr>
-                                <td><b>Encoders replacement</b><p></p>
-                                  <img src="files/EncoderReplacement.JPG" alt="Xpander LFO rate to BPM conversion chart">  
-                                </td>
-                                <td><a href="https://xplorer2716.github.io/XplorerEditor.site/files/bourn-PEC09-2325K-N0015.pdf"
-                                        class="download-link" title="PEC09-2325K-N0015">link</a></td>
-
-                            </tr>    
-                                <tr>
-                                <td>redshift-consulting Oberheim Xpander</td>
-                                <td><a href="https://www.redshift-consulting.com/oberheim-xpander.html"
-                                        class="download-link" title="PEC09-2325K-N0015">link</a></td>
-
-                            </tr>                         
-                        </tbody>
-                    </table>
-                </div>
-               <div class="resource-subsection">
-                    <h3 class="subsection-headline">Sound programming</h3>
-                    <p class="description-text">LFO speed to BPM conversion</p>
-     
-                    <img src="https://xplorer2716.github.io/XplorerEditor.site/files/XpanderLFoRateToBpm.jpg" alt="Xpander LFO rate to BPM conversion chart" class="resource-img">
-                             
-                </div>
+        <!-- ============================================================= CTA -->
+        <section class="section section--tight">
+            <div class="wrap cta">
+                <h2 class="cta__title">Got an Xpander or a Matrix-12 sitting there? Give it a screen.</h2>
+                <p class="cta__aside">Xplorer is free and open source. <a
+                        href="https://github.com/xplorer2716/XplorerEditor/releases/latest" target="_blank"
+                        rel="noopener">Download the latest release</a> or <a
+                        href="https://github.com/xplorer2716/XplorerEditor" target="_blank" rel="noopener">browse the
+                        source on GitHub</a>.</p>
             </div>
-        </div>
+        </section>
 
     </main>
 
     <footer class="site-footer">
-        <div class="container">
-            <p>© Xplorer — real-time Oberheim Xpander &amp; Matrix-12 editor. Visit the <a
-                    href="https://github.com/xplorer2716/XplorerEditor">project on GitHub</a> for downloads and source code
-            </p>
+        <div class="wrap">
+            <div class="footer__rows">
+                <div class="footer__row">
+                    <h2 class="footer__heading">Get&nbsp;Xplorer</h2>
+                    <div class="footer__links">
+                        <a href="https://github.com/xplorer2716/XplorerEditor/releases/latest" target="_blank"
+                            rel="noopener">Latest release</a>
+                        <a href="https://github.com/xplorer2716/XplorerEditor" target="_blank"
+                            rel="noopener">Repository</a>
+                        <a href="https://github.com/xplorer2716/XplorerEditor/issues" target="_blank"
+                            rel="noopener">Issues &amp; feedback</a>
+                        <a href="https://github.com/xplorer2716/XplorerEditor/blob/main/LICENSE" target="_blank"
+                            rel="noopener">License</a>
+                    </div>
+                </div>
+                <div class="footer__row">
+                    <h2 class="footer__heading">Explore</h2>
+                    <div class="footer__links">
+                        <a href="#interface">The editor</a>
+                        <a href="#features">Main features</a>
+                        <a href="#videos">Videos</a>
+                        <a href="#resources">Resources</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer__base">
+                <p class="footer__fine">
+                    © Xplorer — a real-time, bi-directional editor for the Oberheim Xpander and Matrix-12.<br>
+                    Not affiliated with or endorsed by Oberheim. Oberheim, Xpander and Matrix-12 are trademarks of their
+                    respective owners.
+                </p>
+                <p class="footer__fine footer__base--end">
+                    Instrument photography via Wikimedia Commons —
+                    <a href="https://commons.wikimedia.org/wiki/File:Oberheim_Matrix-12_synthesizer.jpg"
+                        target="_blank" rel="noopener">Matrix-12</a> by Swiss Frank (CC&nbsp;BY-SA&nbsp;4.0),
+                    <a href="https://commons.wikimedia.org/wiki/File:Effects_units_on_synthesizer_stack_-_Mu-tron_Bi-Phase,_Oberheim_Xpander,_Moog_memorymoog,_Sequencial_Circuits_Prophet-T8,_etc_-_La_Siesta_del_Fauno_Estudio-Laboratorio_(2016-07-05_18.38.58_by_Andr%C3%A9s_Galeotti).jpg"
+                        target="_blank" rel="noopener">studio stack</a> by Andrés Galeotti (CC&nbsp;BY&nbsp;2.0).
+                </p>
+            </div>
         </div>
     </footer>
-</body>
 
-<!-- Ensure header is never smaller than the header image: set min-height dynamically -->
-<script>
-    (function() {
-        function ensureHeaderMin() {
-            var img = document.querySelector('.site-header .header-logo');
-            var header = document.querySelector('.site-header');
-            if (!img || !header) return;
-
-            // Use rendered height so it matches CSS scaling (device width, responsive).
-            var h = img.getBoundingClientRect().height || img.naturalHeight || 0;
-            if (h > 0) {
-                header.style.minHeight = Math.ceil(h) + 'px';
+    <script>
+        (function () {
+            var targets = document.querySelectorAll('.reveal');
+            if (!('IntersectionObserver' in window)) {
+                targets.forEach(function (el) { el.classList.add('is-visible'); });
+                return;
             }
-        }
-
-        // Run when image loads (covers cached and fresh loads)
-        var logo = document.querySelector('.site-header .header-logo');
-        if (logo) {
-            if (logo.complete) {
-                ensureHeaderMin();
-            } else {
-                logo.addEventListener('load', ensureHeaderMin);
-            }
-        }
-
-        // Also adjust on window resize (responsive layouts)
-        window.addEventListener('resize', function() {
-            // small timeout to let layout settle
-            setTimeout(ensureHeaderMin, 50);
-        });
-    })();
-</script>
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                });
+            }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+            targets.forEach(function (el) { observer.observe(el); });
+        })();
+    </script>
 
 </body>
 

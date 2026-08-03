@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:onepagelove.com)",
+      "WebSearch",
+      "Bash(grep -oE 'class=\"[^\"]{0,400}\"' /tmp/flex.html | sed -n '60,160p')",
+      "Read(//tmp/**)",
+      "Bash(grep -oE '\\\\-\\\\-color-base-[0-9]+:[^;]*;' /tmp/flex.css | head -20; echo \"--- fonts ---\"; grep -oE '\\\\-\\\\-font-[a-z]+:[^;]*;' /tmp/flex.css | head; echo \"--- marquee ---\"; grep -oE '@keyframes marquee\\\\{[^}]*\\\\}[^}]*\\\\}' /tmp/flex.css | head -3)",
+      "Bash(curl -sL --max-time 40 -A \"XplorerSite/1.0\" -o \"oberheim-matrix12.jpg\" \"https://upload.wikimedia.org/wikipedia/commons/4/4e/Oberheim_Matrix-12_synthesizer.jpg\")",
+      "Bash(curl -sL --max-time 40 -A \"XplorerSite/1.0\" -o \"oberheim-xpander.jpg\" \"https://upload.wikimedia.org/wikipedia/commons/7/72/Oberheim_Xpander.jpg\")",
+      "Bash(curl -sL --max-time 40 -A \"XplorerSite/1.0\" -o \"oberheim-xpander-rear.jpg\" \"https://upload.wikimedia.org/wikipedia/commons/c/cc/Oberheim_Xpander_%28rear%29.jpg\")",
+      "Bash(curl -sL --max-time 40 -A \"XplorerSite/1.0\" -o \"studio-rack.jpg\" \"https://upload.wikimedia.org/wikipedia/commons/e/e8/Effects_units_on_synthesizer_stack_-_Mu-tron_Bi-Phase%2C_Oberheim_Xpander%2C_Moog_memorymoog%2C_Sequencial_Circuits_Prophet-T8%2C_etc_-_La_Siesta_del_Fauno_Estudio-Laboratorio_%282016-07-05_18.38.58_by_Andr%C3%A9s_Galeotti%29.jpg\")"
+    ]
+  }
+}
