@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+    sitemap.xml – Xplorer Editor site
+    Standard XML Sitemap (https://www.sitemaps.org/protocol.html)
+    Lists all crawlable URLs on the site.
+    Image files are intentionally excluded from this sitemap because
+    they are not standalone pages. The robots.txt Sitemap directive
+    points here so crawlers discover it automatically.
+    Last updated: 2026-05-31
+-->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Home page / only page of this single-page site -->
   <url>
     <loc>https://xplorer2716.github.io/XplorerEditor.site/</loc>
-    <priority>1.00</priority>
+    <lastmod>2026-05-31</lastmod>
     <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://xplorer2716.github.io/XplorerEditor.site/index_files/XplorerFullScreenSmall.jpg</loc>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://xplorer2716.github.io/XplorerEditor.site/index_files/header.jpg</loc>
-    <priority>0.5</priority>
+    <priority>1.00</priority>
   </url>
 </urlset>
