@@ -6,13 +6,13 @@
     Image files are intentionally excluded from this sitemap because
     they are not standalone pages. The robots.txt Sitemap directive
     points here so crawlers discover it automatically.
-    Last updated: 2026-05-31
+    Last updated: 2026-08-18
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Home page / only page of this single-page site -->
   <url>
     <loc>https://xplorer2716.github.io/XplorerEditor.site/</loc>
-    <lastmod>2026-05-31</lastmod>
+    <lastmod>2026-08-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.00</priority>
   </url>
